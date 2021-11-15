@@ -1,5 +1,6 @@
 const express = require('express')
 const chalk = require('chalk')
+const favicon = require('serve-favicon')
 const morgan = require('morgan')
 const mongoose = require('mongoose')
 require('dotenv').config()
@@ -7,6 +8,7 @@ const methodOverride = require('method-override')
 const postRoutes = require('./routes/post-routes')
 const postApiRoutes = require('./routes/api-post-routes')
 const contactRoutes = require('./routes/contact-routes')
+const path = require('path')
 const createPath = require('./helpers/create-path')
 
 const errorMsg = chalk.bgKeyword('white').redBright
@@ -30,6 +32,8 @@ app.listen(process.env.PORT,  (error) => {
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
 
 app.use(express.urlencoded({extended: false}))
+
+app.use(favicon(path.join(__dirname, 'public', 'favicon.png')))
 
 app.use(express.static('styles'))
 
