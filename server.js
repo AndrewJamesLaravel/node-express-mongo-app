@@ -1,6 +1,6 @@
 const express = require('express')
-const chalk = require('chalk')
 const favicon = require('serve-favicon')
+const chalk = require('chalk')
 const morgan = require('morgan')
 const mongoose = require('mongoose')
 require('dotenv').config()
@@ -15,6 +15,8 @@ const errorMsg = chalk.bgKeyword('white').redBright
 const successMsg = chalk.bgKeyword('green').black
 
 const app = express()
+
+app.use(favicon(path.join(__dirname, 'public', 'favicon.png')))
 
 app.set('view engine', 'ejs')
 
@@ -32,8 +34,6 @@ app.listen(process.env.PORT,  (error) => {
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
 
 app.use(express.urlencoded({extended: false}))
-
-app.use(favicon(path.join(__dirname, 'public', 'favicon.png')))
 
 app.use(express.static('styles'))
 
